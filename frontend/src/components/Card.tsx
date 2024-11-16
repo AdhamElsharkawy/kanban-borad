@@ -42,7 +42,7 @@ const Card: React.FC<CardProps> = ({ member, onEdit, onDelete }) => {
     <>
       <div className="bg-white rounded-lg shadow-md p-4 mb-2 text-gray-800 border border-gray-200">
         <div className="flex justify-between items-center">
-          <h3 className="font-bold text-gray-900">{member.name}</h3>
+          <h3 className="font-bold text-gray-900">{member.title} {member.name}</h3>
           <span className="text-gray-500 text-sm">{member.age} yo</span>
         </div>
         <p className="text-gray-500">{member.email}</p>

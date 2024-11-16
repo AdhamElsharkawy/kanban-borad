@@ -8,7 +8,6 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
-//   const [status, setStatus] = useState('');
   const [name, setName] = useState('');
   const [age, setAge] = useState<number | ''>('');
   const [email, setEmail] = useState('');
@@ -19,10 +18,7 @@ const Form: React.FC<FormProps> = ({ onSubmit }) => {
     const newErrors: { [key: string]: string } = {};
     if (!title) newErrors.title = 'Title is required';
     if (!name) newErrors.name = 'Name is required';
-    if (!age || age < 16 || age > 99) newErrors.age = 'Age must be between 18 and 99';
-    // if (!status) newErrors.status = 'Status is required';
-    //status is should between 'sent_to_therapists , preparing_offer, first_contact, unclaimed'
-    // if (! ['sent_to_therapists', 'preparing_offer', 'first_contact', 'unclaimed'].includes(status)) newErrors.status = 'Status is not valid';
+    if (!age || age < 18 || age > 120) newErrors.age = 'Age must be between 18 and 120';
     if (!/^\S+@\S+\.\S+$/.test(email)) newErrors.email = 'Enter a valid email address';
 
     const phoneNumber = parsePhoneNumberFromString(mobile);

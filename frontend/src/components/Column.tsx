@@ -12,7 +12,7 @@ interface ColumnProps {
 
 const Column: React.FC<ColumnProps> = ({ title, members, onEdit, onDelete }) => {
   return (
-    <div className="bg-blue-100 rounded-lg shadow-md p-4 w-72">
+    <div className="bg-blue-100 rounded-lg shadow-md p-4 w-72 text-left">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-gray-700">{title}</h2>
         <span className="bg-gray-200 text-gray-600 text-sm font-medium px-2 py-0.5 rounded-full">
