@@ -15,7 +15,7 @@ const EditMemberModal: React.FC<EditMemberModalProps> = ({ member, onSave, onClo
         status: member.status,
         name: member.name,
         title: member.title,
-        age: member.age.toString(),
+        age: member.age,
         email: member.email,
         mobile: member.mobile,
     });
@@ -48,7 +48,7 @@ const EditMemberModal: React.FC<EditMemberModalProps> = ({ member, onSave, onClo
 
         if (!form.age) {
             errors.age = 'Age is required';
-        } else if (parseInt(form.age, 10) < 18) {
+        } else if (form.age < 18) {
             errors.age = 'Age must be at least 18';
         }
 

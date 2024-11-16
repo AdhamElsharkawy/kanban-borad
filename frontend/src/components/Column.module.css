@@ -1,0 +1,20 @@
+/* Scrollbar styles for custom-scrollbar class */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+    border-radius: 10px; /* Rounded corners of the scrollbar */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #d8e7f3; /* Light blue-gray background for the track */
+    border-radius: 10px; /* Rounded track edges */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #8cb8d6; /* Soft blue color for the scrollbar thumb */
+    border-radius: 10px; /* Rounded edges for the thumb */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #4f8bb7; /* Darker blue when hovered */
+  }
+  

@@ -12,27 +12,27 @@ const Board: React.FC = () => {
     }, []);
 
     const fetchMembers = async () => {
-        const response = await axios.get('https://api.mockfly.dev/mocks/3e95620e-e775-4f6c-8714-0b5cbbc44e36/api/members');
+        const response = await axios.get('http://127.0.0.1:8000/api/members');
+        console.log('response', response.data);
+
         setMembers(response.data);
     };
 
     //update the member 
     const updateMember = async (updatedMember: Member) => {
         console.log('xxx');
-        
-        try {
-            console.log('member',updatedMember);
 
-            // Use POST instead of PUT if Mockfly does not support PUT
+        try {
+            console.log('member', updatedMember);
             const response = await axios.put(
-                `https://api.mockfly.dev/mocks/3e95620e-e775-4f6c-8714-0b5cbbc44e36/edit-member`, 
+                `http://127.0.0.1:8000/api/members/${updatedMember.id}`,
                 updatedMember
             );
-            
-            if (response.status === 200) {                
+
+            if (response.status === 200) {
                 // Update member in the state
-                setMembers((prevMembers) => 
-                    prevMembers.map((member) => 
+                setMembers((prevMembers) =>
+                    prevMembers.map((member) =>
                         member.id === updatedMember.id ? updatedMember : member
                     )
                 );
@@ -43,18 +43,29 @@ const Board: React.FC = () => {
             console.error("Error updating member:", error);
         }
     };
-    
+
 
     const addMember = async (member: Member) => {
-        const response = await axios.post('https://api.mockfly.dev/mocks/3e95620e-e775-4f6c-8714-0b5cbbc44e36/api/members', member);
-        console.log('response',response);
-            
-        setMembers([...members, response.data]);
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/members', member);
+            console.log('response', response);
+            setMembers([...members, response.data]);
+
+        } catch (error) {
+            console.error("Error adding member:", error);
+
+        }
     };
 
     const deleteMember = async (id: number) => {
-        await axios.delete(`/api/members/${id}`);
-        setMembers(members.filter(member => member.id !== id));
+        try {
+            await axios.delete(`http://127.0.0.1:8000/api/members/${id}`);
+            setMembers(members.filter(member => member.id !== id));
+
+        } catch (error) {
+            console.error("Error deleting member:", error);
+
+        }
     };
 
     return (

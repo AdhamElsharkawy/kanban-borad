@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Column.module.css';
 import Card from './Card';
 import { Member } from './types';
 
@@ -18,7 +19,7 @@ const Column: React.FC<ColumnProps> = ({ title, members, onEdit, onDelete }) => 
           {members.length}
         </span>
       </div>
-      <div className="overflow-y-auto max-h-96 pr-2">
+      <div className={`overflow-y-auto max-h-96 pr-2 ${styles['custom-scrollbar']}`}>
         {members.map((member) => (
           <Card key={member.id} member={member} onEdit={onEdit} onDelete={onDelete} />
         ))}
@@ -28,3 +29,5 @@ const Column: React.FC<ColumnProps> = ({ title, members, onEdit, onDelete }) => 
 };
 
 export default Column;
+
+
