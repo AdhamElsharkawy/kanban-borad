@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { Draggable } from "react-beautiful-dnd";
 import { Member } from './types';
 import EditMemberModal from './EditMemberModal';
 import Modal from 'react-modal';
@@ -8,11 +9,12 @@ interface CardProps {
   member: Member;
   onEdit: (updatedMember: Member) => void;
   onDelete: (id: number) => void;
+  index: number;
 }
 
-const Card: React.FC<CardProps> = ({ member, onEdit, onDelete }) => {
+const Card: React.FC<CardProps> = ({ member, onEdit, onDelete, index }) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  //show card details
+
   const [showDetails, setShowDetails] = useState(false);
 
   const handleEditClick = () => {
@@ -31,26 +33,34 @@ const Card: React.FC<CardProps> = ({ member, onEdit, onDelete }) => {
     setShowDetails(false);
   };
 
-
-
   const handleSave = (updatedMember: Member) => {
     onEdit(updatedMember);
     setEditModalOpen(false);
   };
+  console.log(`Rendering Draggable - ID: ${member.id}, Index: ${index}, Status: ${member.status}`);
+
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-md p-4 mb-2 text-gray-800 border border-gray-200">
-        <div className="flex justify-between items-center">
-          <h3 className="font-bold text-gray-900">{member.title} {member.name}</h3>
-          <span className="text-gray-500 text-sm">{member.age} yo</span>
-        </div>
-        <p className="text-gray-500">{member.email}</p>
-        <p className="text-gray-500">{member.mobile}</p>
-        <button onClick={handleDetailsClick} className="text-black m-2">Details</button>
-        <button onClick={handleEditClick} className="text-blue-500 mt-2">Edit</button>
-        <button onClick={() => onDelete(member.id)} className="text-red-500 ml-4">Delete</button>
-      </div>
+      <Draggable draggableId={String(member.id)} index={index}>
+        {(provided) => (
+          <div className="bg-white rounded-lg shadow-md p-4 mb-2 text-gray-800 border border-gray-200"
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <div className="flex justify-between items-center">
+              <h3 className="font-bold text-gray-900">{member.title} {member.name}</h3>
+              <span className="text-gray-500 text-sm">{member.age} yo</span>
+            </div>
+            <p className="text-gray-500">{member.email}</p>
+            <p className="text-gray-500">{member.mobile}</p>
+            <button onClick={handleDetailsClick} className="text-black m-2">Details</button>
+            <button onClick={handleEditClick} className="text-blue-500 mt-2">Edit</button>
+            <button onClick={() => onDelete(member.id)} className="text-red-500 ml-4">Delete</button>
+          </div>
+        )}
+      </Draggable>
 
       {showDetails && <Modal
         isOpen
@@ -143,4 +153,4 @@ const Card: React.FC<CardProps> = ({ member, onEdit, onDelete }) => {
   );
 };
 
-export default Card;
+export default Card // Use React.memo
