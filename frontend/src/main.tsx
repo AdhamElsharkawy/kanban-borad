@@ -6,3 +6,4 @@ import './index.css'
 createRoot(document.getElementById('root')!).render(
     <App />
 )
+//remove StrictMode from the render method as it damage drag and drop functionality

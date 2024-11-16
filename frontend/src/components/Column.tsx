@@ -45,6 +45,6 @@ const Column: React.FC<ColumnProps> = ({ title, members, onEdit, onDelete, dropp
   );
 };
 
-export default Column; // Use React.memo
+export default Column; 
 
 
